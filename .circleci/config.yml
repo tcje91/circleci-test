@@ -11,7 +11,7 @@ jobs:
       - persist_to_workspace:
           root: my_workspace
           paths:
-              - echo_out
+            - echo_out
   job_two:
     docker:
       - image: circleci/node:latest
@@ -21,16 +21,16 @@ jobs:
       - attach_workspace:
           at: my_workspace
       - run: |
-          if [[ $(cat my_workspace/echo_out) == "He was a good man..." ]]; then
-            echo "This is a great honour";
-          else
-            echo "This is terrible..."; exit 1
-          fi
+        if [[ $(cat my_workspace/echo_out) == "He was a good man..." ]]; then
+          echo "This is a great honour";
+        else
+          echo "This is terrible..."; exit 1
+        fi
 workflows:
   version: 2
   one_and_two:
     jobs:
       - job_one
       - job_two:
-          requires:
-            - job_one
+        requires:
+          - job_one
