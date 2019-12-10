@@ -1,36 +1,22 @@
 version: 2
 jobs:
-  job_one:
+  testing:
     docker:
     - image: circleci/node:latest
     steps:
     - checkout
-    - run: echo "What a shame..."
-    - run: mkdir my_workspace
-    - run: echo "He was a good man..." > my_workspace/echo_out
-    - persist_to_workspace:
-        root: my_workspace
-        paths:
-        - echo_out
-  job_two:
+    - run: npm test
+
+  linting:
     docker:
     - image: circleci/node:latest
     steps:
     - checkout
-    - run: echo "What a rotten way to die..."
-    - attach_workspace:
-        at: my_workspace
-    - run: |
-        if [[ $(cat my_workspace/echo_out) == "He was a good man..." ]]; then
-          echo "This is a great honour";
-        else
-          echo "This is terrible..."; exit 1
-        fi
+    - npm run lint
+
 workflows:
   version: 2
   one_and_two:
     jobs:
-    - job_one
-    - job_two:
-        requires:
-        - job_one
+    - testing
+    - linting
