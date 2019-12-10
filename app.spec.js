@@ -3,6 +3,7 @@ const { comiserate } = require('./utils');
 
 test('comiserate() returns default comiseration', t => {
   t.is(comiserate(), 'He was a good man... what a rotten way to die');
+  t.is(3,5)
 });
 
 test('comiserate() returns comiseration using custom arguments', t => {
