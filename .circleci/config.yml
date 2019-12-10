@@ -12,7 +12,7 @@ jobs:
     - image: circleci/node:latest
     steps:
     - checkout
-    - npm run lint
+    - run: npm run lint
 
 workflows:
   version: 2
